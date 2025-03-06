@@ -6,31 +6,14 @@
     prefix
     com_port
     use_fake_hardware:=false
-<<<<<<< HEAD
-    mock_sensor_commands:=false
-    sim_ignition:=false
-=======
     fake_sensor_commands:=false
     sim_gazebo:=false
->>>>>>> main
     sim_isaac:=false
     isaac_joint_commands:=/isaac_joint_commands
     isaac_joint_states:=/isaac_joint_states
     use_internal_bus_gripper_comm:=true
     moveit_active:=false">
 
-<<<<<<< HEAD
-    <xacro:include filename="$(find kortex_description)/grippers/gen3_lite_2f/urdf/gen3_lite_2f.ros2_control.xacro" />
-    <xacro:gripper_ros2_control
-      prefix="${prefix}"
-      use_fake_hardware="${use_fake_hardware}"
-      mock_sensor_commands="${mock_sensor_commands}"
-      sim_ignition="${sim_ignition}"
-      sim_isaac="${sim_isaac}"
-      isaac_joint_commands="${isaac_joint_commands}"
-      isaac_joint_states="${isaac_joint_states}"
-      use_internal_bus_gripper_comm="${use_internal_bus_gripper_comm}"/>
-=======
   <xacro:if value="${use_fake_hardware or sim_isaac or sim_gazebo}">
     <xacro:unless value="${moveit_active}">
     <!-- ros2 control include -->
@@ -44,7 +27,6 @@
       <xacro:unless value="${use_fake_hardware or sim_gazebo}">
         <xacro:property name="ros2_control_name" value="${prefix}KortexMultiInterfaceHardware"/>
       </xacro:unless>
->>>>>>> main
 
       <xacro:gripper_ros2_control
         prefix="${prefix}"

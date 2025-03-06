@@ -4,13 +4,8 @@
     <xacro:macro name="gripper_ros2_control" params="
         prefix
         use_fake_hardware:=false
-<<<<<<< HEAD
-        mock_sensor_commands:=false
-        sim_ignition:=false
-=======
         fake_sensor_commands:=false
         sim_gazebo:=false
->>>>>>> main
         sim_isaac:=false
         isaac_joint_commands:=/isaac_joint_commands
         isaac_joint_states:=/isaac_joint_states
@@ -40,11 +35,7 @@
                 </xacro:if>
                 <xacro:if value="${use_fake_hardware}">
                     <plugin>mock_components/GenericSystem</plugin>
-<<<<<<< HEAD
-                    <param name="mock_sensor_commands">${mock_sensor_commands}</param>
-=======
                     <param name="mock_sensor_commands">${fake_sensor_commands}</param>
->>>>>>> main
                     <param name="state_following_offset">0.0</param>
                 </xacro:if>
                 <xacro:unless value="${sim_isaac or sim_gazebo or use_fake_hardware}">
