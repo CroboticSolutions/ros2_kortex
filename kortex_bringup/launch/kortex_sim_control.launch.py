@@ -37,7 +37,6 @@ from launch_ros.substitutions import FindPackageShare
 
 def launch_setup(context, *args, **kwargs):
     # Initialize Arguments
-    sim_gazebo = LaunchConfiguration("sim_gazebo")
     sim_ignition = LaunchConfiguration("sim_ignition")
     robot_type = LaunchConfiguration("robot_type")
     dof = LaunchConfiguration("dof")
@@ -91,9 +90,6 @@ def launch_setup(context, *args, **kwargs):
             " ",
             "prefix:=",
             prefix,
-            " ",
-            "sim_gazebo:=",
-            sim_gazebo,
             " ",
             "sim_ignition:=",
             sim_ignition,
@@ -171,37 +167,6 @@ def launch_setup(context, *args, **kwargs):
         output="screen",
     )
 
-    # Gazebo nodes
-    gzserver = ExecuteProcess(
-        cmd=["gzserver", "-s", "libgazebo_ros_init.so", "-s", "libgazebo_ros_factory.so", ""],
-        output="screen",
-        condition=IfCondition(sim_gazebo),
-    )
-
-    # Gazebo client
-    gzclient = ExecuteProcess(
-        cmd=["gzclient"],
-        output="screen",
-        condition=IfCondition(sim_gazebo),
-    )
-
-    # gazebo = IncludeLaunchDescription(
-    # PythonLaunchDescriptionSource(
-    # [PathJoinSubstitution([FindPackageShare("gazebo_ros"), "launch", "gazebo.launch.py"])]
-    # ),
-    # launch_arguments={"verbose": "false"}.items(),
-    # )
-
-    # Spawn robot
-    gazebo_spawn_robot = Node(
-        package="gazebo_ros",
-        executable="spawn_entity.py",
-        name="spawn_robot",
-        arguments=["-entity", robot_name, "-topic", "robot_description"],
-        output="screen",
-        condition=IfCondition(sim_gazebo),
-    )
-
     ignition_spawn_entity = Node(
         package="ros_gz_sim",
         executable="create",
@@ -259,9 +224,6 @@ def launch_setup(context, *args, **kwargs):
         robot_traj_controller_spawner,
         robot_pos_controller_spawner,
         robot_hand_controller_spawner,
-        gzserver,
-        gzclient,
-        gazebo_spawn_robot,
         ignition_launch_description,
         ignition_spawn_entity,
         gazebo_bridge,
