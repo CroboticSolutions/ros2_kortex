@@ -64,13 +64,74 @@
         </transmission>
 
         <transmission name="${prefix}joint_7_transmission">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="${prefix}joint_7">
-            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-        </joint>
-        <actuator name="${prefix}joint_7_motor">
-            <mechanicalReduction>1</mechanicalReduction>
-        </actuator>
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${prefix}joint_7">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${prefix}joint_7_motor">
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+
+        <transmission name="${prefix}robotiq_85_left_knuckle_joint_transmission">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${prefix}robotiq_85_left_knuckle_joint">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${prefix}robotiq_85_left_knuckle_joint_motor">
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+
+        <transmission name="${prefix}robotiq_85_right_knuckle_joint_transmission">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${prefix}robotiq_85_right_knuckle_joint">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${prefix}robotiq_85_right_knuckle_joint_motor">
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+
+        <transmission name="${prefix}robotiq_85_right_finger_tip_joint_transmission">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${prefix}robotiq_85_right_finger_tip_joint">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${prefix}robotiq_85_right_finger_tip_joint_transmission_motor">
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+
+        <transmission name="${prefix}robotiq_85_left_finger_tip_joint_transmission">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${prefix}robotiq_85_left_finger_tip_joint">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${prefix}robotiq_85_left_finger_tip_joint_transmission_motor">
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+
+        <transmission name="${prefix}robotiq_85_left_inner_knuckle_joint_transmission">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${prefix}robotiq_85_left_inner_knuckle_joint">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${prefix}robotiq_85_left_inner_knuckle_joint_motor">
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+
+
+        <transmission name="${prefix}robotiq_85_right_inner_knuckle_joint_transmission">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${prefix}robotiq_85_right_inner_knuckle_joint">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${prefix}robotiq_85_right_inner_knuckle_joint_motor">
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
         </transmission>
 
     </xacro:macro>
