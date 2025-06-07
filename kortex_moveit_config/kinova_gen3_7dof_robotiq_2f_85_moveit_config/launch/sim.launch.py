@@ -76,10 +76,9 @@ def generate_launch_description():
         "vision": vision,
     }
 
-    # Setup planning pipeline
     planning_pipeline = {
-        "planning_pipelines": ["ompl"],
-        "default_planning_pipeline": "ompl",
+        "planning_pipelines": ["ompl", "pilz_industrial_motion_planner"],
+        "default_planning_pipeline": "pilz_industrial_motion_planner",
         "ompl": {
             "planning_plugin": "ompl_interface/OMPLPlanner",
             # TODO: Re-enable `default_planner_request_adapters/AddRuckigTrajectorySmoothing` once its issues are resolved
@@ -87,17 +86,23 @@ def generate_launch_description():
             # TODO: Reduce start_state_max_bounds_error once spawning with specific joint configuration is enabled
             "start_state_max_bounds_error": 0.31416,
         },
+        "pilz_industrial_motion_planner": {
+            "planning_plugin": "pilz_industrial_motion_planner/CommandPlanner",
+        },
     }
 
-    _ompl_yaml = load_yaml(
-        moveit_config_package, os.path.join("config", "ompl_planning.yaml")
-    )
+    # Load the planning pipeline configuration 
+    _ompl_yaml = load_yaml("ur_moveit_config", "config/ompl_planning.yaml")
+    planning_pipeline["ompl"].update(_ompl_yaml)
 
+    _pilz_yaml = load_yaml("ur_moveit_config", "config/pilz_industrial_motion_planner_planning.yaml")
+    _pilz_limits_yaml = load_yaml("ur_moveit_config", "config/pilz_cartesian_limits.yaml")
+    
+    planning_pipeline["pilz_industrial_motion_planner"].update(_pilz_yaml)
+    planning_pipeline["pilz_industrial_motion_planner"].update(_pilz_limits_yaml)
     _kinematics_yaml = load_yaml(
         moveit_config_package, os.path.join("config", "kinematics.yaml")
     )
-
-    planning_pipeline["ompl"].update(_ompl_yaml)
 
     moveit_config = (
         MoveItConfigsBuilder("gen3", package_name="kinova_gen3_7dof_robotiq_2f_85_moveit_config")
